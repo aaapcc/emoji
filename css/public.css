@@ -1,0 +1,43 @@
+@charset "utf-8";
+/* CSS Document */
+
+body,ul,ol,li,p,h1,h2,h3,h4,h5,h6,dl,dd,dt,p,input{margin:0px;padding:0px;}
+ul,li,dl,dd,dt,ol{list-style:none;}
+ins{display:none;}
+img{border:none;display: block;}
+.clear{font-size:0px;line-height:0px;display:block;clear:both;}
+
+a{cursor:pointer;}
+a:link,a:visited{color:#0072ff;/*text-decoration:none;*/}
+a:hover{color:#09baef;/*text-decoration:none;*/}
+
+body{font:15px/24px Arial,"microsoft yahei";color:#333;}
+
+
+
+/* css注释：设置了浏览器宽度不小于1001px时 */ 
+@media screen and ( min-width: 701px ) { 
+	/*首页*/
+	.body_wp{ width: 1200px; padding: 0px 0px 50px; margin: 0 auto; }
+
+	.mk_wp{ margin-top: 20px; }
+	.mk_wp .bt_title{ color: #2883C9; height: 50px; line-height: 50px; font-size: 18px; }
+	.mk_wp ul.sys{ overflow: hidden; text-align: center; font-size: 30px; border: 1px solid #ccc; padding: 10px; }
+	.mk_wp ul.sys li{ float: left; /*margin: 0px 5px;*/ width: 4%; line-height: 46px; }
+
+}
+
+
+/* 设置了浏览器宽度不大于1000px时 */ 
+@media screen and ( max-width: 700px ) { 
+	body{ background-size: 220px; }
+
+	/*首页*/
+	.body_wp{ width: calc(100% - 30px); padding: 0px 15px 50px; }
+
+	.mk_wp{ margin-top: 20px; }
+	.mk_wp .bt_title{ color: #2883C9; height: 50px; line-height: 50px; font-size: 18px; }
+	.mk_wp ul.sys{ overflow: hidden; text-align: center; font-size: 24px; border: 1px solid #ccc; padding: 10px; }
+	.mk_wp ul.sys li{ float: left; /*margin: 0px 5px;*/ width: 10%; line-height: 38px; }
+
+}
