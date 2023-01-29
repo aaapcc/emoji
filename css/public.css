@@ -51,6 +51,7 @@ body{font:15px/24px Arial,"microsoft yahei";color:#333;}
 
 	/*首页*/
 	.head_nav ul{ width: 100%; }
+	.head_nav ul li{ width: 33%; }
 
 	.body_wp{ width: calc(100% - 30px); padding: 0px 15px 50px; }
 
