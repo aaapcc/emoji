@@ -1,0 +1,181 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+<title>数字&字母生成</title>
+<link rel="stylesheet" type="text/css" href="../css/public.css">
+<script>(function(){var a=document.documentElement.clientWidth||document.body.clientWidth;if(a>460){a=460}else{if(a<320){a=320}}document.documentElement.style.fontSize=(a/26.5)*1+"px"})();</script>
+<script type="text/javascript">
+function setTab(name,cursel,n){for(i=1;i<=n;i++){var menu=document.getElementById(name+i);var con=document.getElementById("con_"+name+"_"+i);menu.className=i==cursel?"select":"";con.style.display=i==cursel?"block":"none"}}
+</script>
+</head>
+
+<body>
+
+<div class="head_nav">
+  <ul>
+    <li><a href="/">Emoji表情</a></li>
+    <li><a href="/fuhao/">文字符号</a></li>
+    <!-- <li><a href="/zimu/">字母数字</a></li> -->
+    <li><a href="/zimusc/" class="cur">数字&字母生成</a></li>
+  </ul>
+</div>
+
+<div class="body_wp">
+
+  <div class="kongzhiqu">
+    <textarea id="inp" maxlength="1000" onblur="clc()"></textarea>
+    <button onclick="clc()">Done</button>
+    <label><input type="checkbox" id="hatted">&ensp;❀加花符号一起生成</label>
+  </div>
+  <div class="sccl">
+    <ul id="out"></ul>
+  </div>
+
+</div>
+
+
+<script type="text/javascript">
+    function codeJoin(offset, char, baseChar) {
+        return ['&#', offset + char.charCodeAt() - baseChar.charCodeAt(), ';'].join('')
+    }
+    function defGener(c, special, codeUpper, codeLower, codeNumber, codeGreeceUpper, codeGreeceLower) {
+        var keys = Object.keys(special);
+        if (special) {
+            for (var i = 0, len = keys.length; i < len; i++) {
+                if (c == keys[i]) {
+                    return '&#' + special[keys[i]] + ';';
+                }
+            }
+        }
+        if (codeUpper && c <= 'Z' && c >= 'A') return codeJoin(codeUpper, c, 'A');
+        else if (codeLower && c <= 'z' && c >= 'a') return codeJoin(codeLower, c, 'a');
+        else if (codeNumber && c <= '9' && c >= '0') return codeJoin(codeNumber, c, '0');
+        else if (codeGreeceUpper && c <= 'Ω' && c >= 'Α') return codeJoin(codeGreeceUpper, c, 'Α');
+        else if (codeGreeceLower && c <= 'ω' && c >= 'α') return codeJoin(codeGreeceLower, c, 'α');
+        return c;
+    }
+    var funcs = {
+        'Serif Bold': function (c) { return defGener(c, {}, 119808, 119808 + 26, 120782, 120488, 120514); },
+        'Serif Italic': function (c) { return defGener(c, { 'h': 8462 }, 119860, 119860 + 26, undefined, 120546, 120572); },
+        'Serif Bold Italic': function (c) { return defGener(c, {}, 119912, 119912 + 26, undefined, 120604, 120630); },
+        'Script': function (c) { return defGener(c, { 'B': 8492, 'E': 8496, 'F': 8497, 'H': 8459, 'I': 8464, 'L': 8466, 'M': 8499, 'R': 8475, 'e': 8495, 'g': 8458, 'o': 8500 }, 119964, 119990); },
+        'Sans-serif': function (c) { return defGener(c, {}, 120224, 120224 + 26, 120802); },
+        'Sans-serif Bold': function (c) { return defGener(c, {}, 120276, 120276 + 26, 120812, 120662, 120688); },
+        'Sans-serif Italic': function (c) { return defGener(c, {}, 120328, 120328 + 26); },
+        'Sans-serif Bold Italic': function (c) { return defGener(c, {}, 120380, 120380 + 26, undefined, 120720, 120746); },
+        'Handwriting': function (c) { return defGener(c, {}, 120016, 120016 + 26); },
+        'Doublestruck': function (c) { return defGener(c, { 'C': 8450, 'H': 8461, 'N': 8469, 'P': 8473, 'Q': 8474, 'R': 8477, 'Z': 8484 }, 120120, 120146, 120792); },
+        'Gothic': function (c) { return defGener(c, { 'C': 8493, 'H': 8460, 'I': 8465, 'R': 8476, 'Z': 8488 }, 120068, 120094); },
+        'Gothic Bold': function (c) { return defGener(c, {}, 120172, 120172 + 26); },
+        'Monospace': function (c) { return defGener(c, {}, 120432, 120432 + 26, 120822); },
+        'Circled': function (c) { return defGener(c, { '0': 9450 }, 9398, 9398 + 26, 9311); },
+        'Negative Circled': function (c) { return defGener(c, { '0': 9471 }, 127312, 127312, 10101); },
+        'Colored': function (c) {
+            var start;
+            if (c <= 'Z' && c >= 'A') { start = 'A'; }
+            else if (c <= 'z' && c >= 'a') { start = 'a'; }
+            if (start) { return '&#x' + (0x1F1E6 + (c.charCodeAt() - start.charCodeAt())).toString(16) + ';&#x200C;'; }
+            return c;
+        },
+        'Squared': function (c) { return defGener(c, {}, 127280, 127280); },
+        'Negative Squared': function (c) { return defGener(c, {}, 127344, 127344); },
+        'Round-bracketed': function (c) { return defGener(c, {}, 127248, 9372, 9332); },
+        'Subscript': function (c) {
+            var map = {
+                'A': 7424, 'B': 665, 'C': 7428, 'D': 7429, 'E': 7431, 'F': 1171, 'G': 610, 'H': 668, 'I': 618, 'J': 7434, 'K': 7435, 'L': 671, 'M': 7437, 'N': 628, 'O': 7439, 'P': 7448, 'Q': 491, 'R': 640, 'S': 115, 'T': 7451, 'U': 7452, 'V': 7456, 'W': 7457, 'X': 120, 'Y': 655, 'Z': 7458, '0': 8320, '1': 8321, '2': 8322, '3': 8323, '4': 8324, '5': 8325, '6': 8326, '7': 8327, '8': 8328, '9': 8329, 'a': 8336, 'c': 42752, 'e': 8337, 'h': 8341, 'i': 7522, 'j': 11388, 'k': 8342, 'l': 8343, 'm': 8344, 'n': 8345, 'o': 8338, 'p': 8346, 'r': 7523, 's': 8347, 't': 8348, 'u': 7524, 'v': 7525, 'x': 8339,
+            }
+            if ((c <= 'Z' && c >= 'A') || (c <= 'z' && c >= 'a') || (c <= '9' && c >= '0')) {
+                return map[c] ? ('&#' + map[c] + ';') : c;
+            }
+            return c;
+        },
+        'Superscript': function (c) {
+            var map = {
+                'a': 7491, 'b': 7495, 'c': 7580, 'd': 7496, 'e': 7497, 'f': 7584, 'g': 7501, 'h': 688, 'i': 8305, 'j': 690, 'k': 7503, 'l': 737, 'm': 7504, 'n': 8319, 'o': 7506, 'p': 7510, 'q': 2407, 'r': 691, 's': 738, 't': 7511, 'u': 7512, 'v': 7515, 'w': 695, 'x': 739, 'y': 696, 'z': 7611, 'A': 7468, 'B': 7470, 'C': 5308, 'D': 7472, 'E': 7473, 'F': 737, 'G': 7475, 'H': 7476, 'I': 7477, 'J': 7478, 'K': 7479, 'L': 7480, 'M': 7481, 'N': 7482, 'O': 7484, 'P': 7486, 'Q': '&#7484;&#820;', 'R': 7487, 'T': 7488, 'U': 7489, 'V': 11389, 'W': 7490, 'X': 5501, 'Z': 5702, '1': 185, '2': 178, '3': 179, '4': 8308, '5': 8309, '6': 8310, '7': 8311, '8': 8312, '9': 8313, '0': 8304,
+            }
+            if ((c <= 'Z' && c >= 'A') || (c <= 'z' && c >= 'a') || (c <= '9' && c >= '0')) {
+                var selected = map[c];
+                console.log(typeof selected)
+                if (typeof selected == 'number') {
+                    return '&#' + selected + ';'
+                } else {
+                    return selected || c;
+                }
+            }
+            return c;
+        }
+    }
+    function genSingle(str, fontName, hat, num) {
+        var func = funcs[fontName];
+        var arr = String(str).split('');
+        var title = document.createElement('h3');
+        title.innerHTML = fontName;
+        if (hat) {
+            for (var i = 0, len = arr.length; i < len; i++) {
+                arr[i] = func(arr[i]) + '&#8203;' + hat;
+            }
+            var span = document.createElement('span');
+            span.innerHTML = hat + num;
+            title.innerHTML += ' with ';
+            title.appendChild(span);
+        } else {
+            for (var i = 0, len = arr.length; i < len; i++) {
+                arr[i] = func(arr[i]);
+            }
+        }
+        var container = document.createElement('li');
+        var text = document.createElement('pre');
+        text.innerHTML = arr.join('');
+        container.appendChild(title);
+        container.appendChild(text);
+        return container;
+    }
+    function getHats() {
+        var ret = [];
+        var blacklist = [79, 83, 84, 85, 88, 90];
+        var llen = blacklist.length;
+        for (var c = 0; c <= 97; c++) {
+            var sign = true;
+            for (var i = 0; i < llen; i++) {
+                if (c == blacklist[i]) {
+                    sign = false;
+                    break;
+                }
+            }
+            if (sign) {
+                ret.push('&#' + (c + 769) + ';');
+            }
+        }
+        return ret
+    }
+    function clc() {
+        var inp = document.getElementById('inp').value;
+        var out = document.getElementById('out');
+        out.innerHTML = '';
+        var hats = getHats();
+        var keys = Object.keys(funcs);
+        if (document.getElementById('hatted').checked) {
+            for (var i1 = 0, len1 = hats.length; i1 < len1; i1++) {
+                for (var i = 0, len = keys.length; i < len; i++) {
+                    var doc = genSingle(inp, keys[i], hats[i1], i1);
+                    out.appendChild(doc);
+                }
+            }
+        } else {
+            for (var i = 0, len = keys.length; i < len; i++) {
+                var doc = genSingle(inp, keys[i]);
+                out.appendChild(doc);
+            }
+        }
+    }
+    // var defaultValue = 'abcdefghijklmnopqrstuvwxyz\nABCDEFGHIJKLMNOPQRSTUVWXYZ\n1234567890\nΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩ\nαβγδεζνξοπρσηθικλμτυφχψω';
+    var defaultValue = 'abcdefghijklmnopqrstuvwxyz.0123456789\nABCDEFGHIJKLMNOPQRSTUVWXYZ.0123456789';
+    document.getElementById('inp').value = defaultValue;
+    clc();
+</script>
+
+
+</body>
+</html>
