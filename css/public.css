@@ -1,7 +1,7 @@
 @charset "utf-8";
 /* CSS Document */
 
-body,ul,ol,li,p,h1,h2,h3,h4,h5,h6,dl,dd,dt,p,input{margin:0px;padding:0px;}
+body,ul,ol,li,p,h1,h2,h3,h4,h5,h6,dl,dd,dt,p,input,pre{margin:0px;padding:0px;}
 ul,li,dl,dd,dt,ol{list-style:none;}
 ins{display:none;}
 img{border:none;display: block;}
@@ -16,14 +16,21 @@ body{font:15px/24px Arial,"microsoft yahei";color:#333;}
 .head_nav{ height: 40px; background: #f2f9ff; }
 .head_nav ul{ width: 1200px; height: 40px; margin: 0 auto; }
 .head_nav ul li{ line-height: 40px; float: left; }
-.head_nav ul li a{ width: 136px; background: #cce9ff; color: #2883C9; display: block; text-align: center; position: relative; margin-right: 1px; }
+.head_nav ul li a{ width: 145px; background: #cce9ff; color: #2883C9; display: block; text-align: center; position: relative; margin-right: 1px; }
 .head_nav ul li a:hover{ background: #2f83c9; color: #fff; }
 .head_nav ul li a.cur{ background: #2f83c9; color: #fff; }
 .head_nav ul li a.cur:hover{ background: #0072ff; color: #fff; }
 .head_nav ul li a.cur:before{ content: ""; border: 8px solid; border-color: #2f83c9 transparent transparent; position: absolute; top: 40px; left: 50%; margin-left: -8px; display: block; }
 .head_nav ul li a.cur:hover:before{ content: ""; border: 8px solid; border-color: #0072ff transparent transparent; position: absolute; top: 40px; left: 50%; margin-left: -8px; display: block; }
 
-
+.kongzhiqu{ padding: 2rem 0rem 2.6rem; }
+.kongzhiqu textarea{ width: calc(100% - 1.4rem); resize: none; min-height: 6rem; height: 7rem; outline: none; font-size: 1rem; letter-spacing: .1rem; padding: .7rem; background: #f2f9ff; color: #000; border: 1px solid #c4dbee; }
+.kongzhiqu button{ font-size: 1.1rem; border: none; border-radius: none; color: #fff; background: #2f83c9; margin: .6rem .5rem 0 0; padding: 0.5rem 1rem; cursor: pointer; }
+.kongzhiqu button:hover{ background-color: #0072ff;}
+.sccl{  }
+.sccl h3 { font-size: 24px; background: #cce9ff; padding: .8rem .5rem; color: #2883C9; }
+.sccl li{ list-style: none; margin-bottom: 2rem; } 
+.sccl li pre{ width: 100%; word-wrap: break-word; padding: 1rem .4rem 0rem; white-space: pre-wrap; letter-spacing: .1rem; font-size: 1.1rem; line-height: 1.4rem; }
 
 /* css注释：设置了浏览器宽度不小于1001px时 */ 
 @media screen and ( min-width: 701px ) { 
@@ -41,9 +48,7 @@ body{font:15px/24px Arial,"microsoft yahei";color:#333;}
 	.tk_wp .btt_title{ color: #2883C9; height: 50px; line-height: 50px; font-size: 18px; }
 	.tk_wp ul.syst{ overflow: hidden; text-align: center; font-size: 20px; border: 1px solid #ccc; padding: 10px; }
 	.tk_wp ul.syst li{ float: left; width: 3.3%; line-height: 34px; }
-
 }
-
 
 /* 设置了浏览器宽度不大于1000px时 */ 
 @media screen and ( max-width: 700px ) { 
@@ -51,7 +56,8 @@ body{font:15px/24px Arial,"microsoft yahei";color:#333;}
 
 	/*首页*/
 	.head_nav ul{ width: 100%; }
-	.head_nav ul li{ width: 33%; }
+	.head_nav ul li{ width: 33.33%; }
+	.head_nav ul li a{ width: 100%; }
 
 	.body_wp{ width: calc(100% - 30px); padding: 0px 15px 50px; }
 
@@ -64,5 +70,4 @@ body{font:15px/24px Arial,"microsoft yahei";color:#333;}
 	.tk_wp .btt_title{ color: #2883C9; height: 50px; line-height: 50px; font-size: 18px; }
 	.tk_wp ul.syst{ overflow: hidden; text-align: center; font-size: 18px; border: 1px solid #ccc; padding: 10px; }
 	.tk_wp ul.syst li{ float: left; width: 10%; line-height: 30px; }
-
 }
